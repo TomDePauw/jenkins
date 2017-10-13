@@ -6,10 +6,24 @@ pipeline {
         echo 'ok'
       }
     }
-    stage('run script') {
-      steps {
-        sh '''echo "hello"
+    stage('running') {
+      parallel {
+        stage('run script') {
+          steps {
+            sh '''echo "hello"
 exit 1'''
+          }
+        }
+        stage('run passes') {
+          steps {
+            sh 'echo "passes"'
+          }
+        }
+      }
+    }
+    stage('') {
+      steps {
+        echo 'finished'
       }
     }
   }
