@@ -6,6 +6,12 @@ pipeline {
         echo 'ok'
       }
     }
+    stage('run script') {
+      steps {
+        sh '''print "hello"
+exit 1'''
+      }
+    }
   }
   environment {
     start = 'ok'
