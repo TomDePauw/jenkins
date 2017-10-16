@@ -3,7 +3,15 @@ pipeline {
   stages {
     stage('start') {
       steps {
-        echo 'ok'
+        sh '''if ssh adhese@hugo stat ~/docker/adhese/_lifecycle/env.sh \\> /dev/null 2\\>\\&1
+            then
+                    echo "File exists"
+                    exit 0;
+            else
+                    echo "File does not exist"
+                    exit 1;
+
+fi'''
       }
     }
     stage('running') {
@@ -21,7 +29,7 @@ exit 1'''
         }
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         echo 'finished'
       }
